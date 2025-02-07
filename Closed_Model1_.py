@@ -117,7 +117,8 @@ print(road_matrix)
 print(flow)
 print(densities)
 print(velocities)
-# 绘制流量变化趋势图
+
+# Plot a trend chart of traffic changes
 plt.figure(figsize=(10, 5))
 plt.plot(range(len(flow)), flow, marker='o', linestyle='-', color='b', label='Traffic Flow')
 plt.xlabel('Time Steps')
@@ -127,7 +128,17 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-# 绘制 Speed-Density 图
+# Plot Time-speed diagram
+plt.figure(figsize=(10, 5))
+plt.plot(range(len(velocities)), velocities, marker='o', linestyle='-', color='g', label='Average Speed')
+plt.xlabel('Time Steps')
+plt.ylabel('Average Speed')
+plt.title('Time-Speed Diagram')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Plot Speed-Density 
 plt.figure(figsize=(10, 5))
 plt.scatter(densities, velocities, color='r', alpha=0.6, label='Speed vs. Density')
 plt.xlabel('Density')
@@ -137,7 +148,50 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+plt.figure(figsize=(10, 5))
+plt.scatter(densities, flows, color='b', alpha=0.6, label='Flow vs. Density')
+plt.xlabel('Density')
+plt.ylabel('Traffic Flow')
+plt.title('Flow vs. Density')
+plt.legend()
+plt.grid(True)
+plt.show()
 
+#space-time diagram
+road_states = []  # storage
+
+for t in range(steps):
+    road = road_matrix[t]  # Use road_matrix to get the road state at each time step
+    road_states.append(road.copy())  # record current state
+
+road_history = np.array(road_states)
+
+plt.figure(figsize=(10, 5))
+plt.imshow(road_history, cmap='gray_r', aspect='auto', interpolation='none')
+plt.xlabel('Space')
+plt.ylabel('Time Steps')
+plt.title('Space-Time Diagram')
+plt.colorbar(label='Vehicle Presence (1=Car, 0=Empty)')
+plt.show()
+
+# Define the simulate_traffic function
+def simulate_traffic(p, length=10, num_cars=3, t0=50, steps=50, vmax=5):
+    flow, densities, velocities, road_matrix, _ = run_simulation(length, num_cars, t0, steps, vmax, p)
+    return flow[-1]  # Return the flow at the last time step
+
+# Generate a range of p values 
+p_values = np.linspace(0, 1, num=10)  # 10 different p values
+flow_results = [simulate_traffic(p) for p in p_values]  
+
+# Plot the results
+plt.figure(figsize=(10, 5))
+plt.plot(p_values, flow_results, marker='s', linestyle='-', color='r', label='Flow vs. p')
+plt.xlabel('Random Probability (p)')
+plt.ylabel('Traffic Flow')
+plt.title('Flow vs. p')
+plt.legend()
+plt.grid(True)
+plt.show()
 # Important: Our road matrix is different from the figure of numbers in the paper. In our code, the number represents the velocity after the car motion.
 # 
 
