@@ -2,8 +2,9 @@ Please download the Closed_Model1.ipynb file, to run the simulation and plot, re
 
 # What is already done:
 
-1. simple one lane model with 4 behaviour from 'A cellular automaton model for freeway traffic'
-2. gif animation to show our model
+1. simple one lane model with 4 behaviour from 'A cellular automaton model for freeway traffic
+2. density-flow diagram, space_time_diagram for model_1
+3. gif animation to show our model
 
 # summer
 
