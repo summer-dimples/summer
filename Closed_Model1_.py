@@ -169,11 +169,11 @@ for t in range(steps):
 road_history = np.array(road_states)
 
 plt.figure(figsize=(10, 5))
-plt.imshow(road_history, cmap='gray_r', aspect='auto', interpolation='none')
-plt.xlabel('Space')
-plt.ylabel('Time Steps')
-plt.title('Space-Time Diagram')
-plt.colorbar(label='Vehicle Presence (1=Car, 0=Empty)')
+plt.imshow(history, cmap="Greys", aspect="auto", origin="lower")
+plt.xlabel("Space (Road)")
+plt.ylabel("Time Step")
+plt.title("Cellular Automaton  space-time diagram")
+plt.colorbar(label="Velocity")
 plt.show()
 
 # Define the simulate_traffic function
