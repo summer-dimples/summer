@@ -149,7 +149,7 @@ plt.grid(True)
 plt.show()
 
 plt.figure(figsize=(10, 5))
-plt.scatter(densities, flows, color='b', alpha=0.6, label='Flow vs. Density')
+plt.scatter(densities, flow, color='b', alpha=0.6, label='Flow vs. Density')
 plt.xlabel('Density')
 plt.ylabel('Traffic Flow')
 plt.title('Flow vs. Density')
@@ -176,13 +176,13 @@ plt.show()
 
 # Define the simulate_traffic function
 def simulate_traffic(p, length=10, num_cars=3, t0=50, steps=50, vmax=5):
-    flow, densities, velocities, road_matrix, _ = run_simulation(length, num_cars, t0, steps, vmax, p)
+    flow, densities, velocities, road_matrix = run_simulation(length, num_cars, t0, steps, vmax, p)
     return flow[-1]  # Return the flow at the last time step
 
 # Generate a range of p values 
 p_values = np.linspace(0, 1, num=10)  # 10 different p values
 flow_results = [simulate_traffic(p) for p in p_values]  
-
+    
 # Plot the results
 plt.figure(figsize=(10, 5))
 plt.plot(p_values, flow_results, marker='s', linestyle='-', color='r', label='Flow vs. p')
