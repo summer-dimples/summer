@@ -118,6 +118,8 @@ print(flow)
 print(densities)
 print(velocities)
 
+np.random.seed(42)
+
 # Plot a trend chart of traffic changes
 plt.figure(figsize=(10, 5))
 plt.plot(range(len(flow)), flow, marker='o', linestyle='-', color='b', label='Traffic Flow')
