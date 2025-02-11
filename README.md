@@ -8,7 +8,7 @@ Please download the Closed_Model1.ipynb file, to run the simulation and plot, re
 
 # summer
 
-CA model
+CA model  multiple lane and lane changes
 
 # Gary
 
