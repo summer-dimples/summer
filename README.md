@@ -8,7 +8,7 @@
 
 1. simple closed one lane model with 4 behaviour from 'A cellular automaton model for freeway traffic'
 2. closed two lane model adding lane swapping
-
+ 
 # summer
 
 CA model multiple lane and lane changes
