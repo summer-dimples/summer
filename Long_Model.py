@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import copy
+import matplotlib.tri as tri
 
 np.random.seed(2532)
-
 
 # dict to store different driver type(can also be used for reaction/...)
 # make sure sapwn_weight sum up to 1
@@ -380,23 +380,75 @@ def simulate_traffic_with_density_control(length, t0, steps, target_density, int
         
     return flows, densities, velocities, lane_change_rates
 
-def run_sensitivity_analysis():
+def plot_vehicle_ratio(ratio_results):
+    lorry_ratios = [result[0] for result in ratio_results]
+    regular_ratios = [result[1] for result in ratio_results]
+    fast_ratios = [result[2] for result in ratio_results]
+    flow_values = [result[3] for result in ratio_results]
+    
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111)
+    
+    corners = np.array([[0, 0], [1, 0], [0.5, 0.75**0.5]])
+    triangle = tri.Triangulation(corners[:, 0], corners[:, 1])
+    
+    ax.triplot(triangle, '-')
 
+    x_values = []
+    y_values = []
+    for l, r, f in zip(lorry_ratios, regular_ratios, fast_ratios):
+        x = l*corners[0,0] + r*corners[1,0] + f*corners[2,0]
+        y = l*corners[0,1] + r*corners[1,1] + f*corners[2,1]
+        x_values.append(x)
+        y_values.append(y)
+        
+    cmap = plt.cm.viridis
+    
+    scatter = ax.scatter(x_values, y_values, c=flow_values, cmap=cmap, s=300, edgecolors='k', zorder=3)
+    
+    cbar = plt.colorbar(scatter, ax=ax)
+    cbar.set_label('Flow')
+    
+    # adding labels
+    ax.text(corners[0,0]-0.05, corners[0,1]-0.05, 'Lorry (100%)', fontsize=12)
+    ax.text(corners[1,0]-0.05, corners[1,1]-0.05, 'Regular (100%)', fontsize=12)
+    ax.text(corners[2,0]-0.05, corners[2,1]+0.05, 'Fast (100%)', fontsize=12)
+    
+    # adding flow values
+    for (x, y, flow) in zip(x_values, y_values, flow_values):
+        ax.text(x, y+0.02, f'{flow:.2f}', ha='center', fontsize=10)
+
+    ax.set_xlim(-0.1, 1.1)
+    ax.set_ylim(-0.1, 0.9)
+    ax.axis('off')
+     
+    plt.tight_layout()
+    plt.savefig('vehicle_ratio_ternary.png')
+    
+    return 
+
+def run_sensitivity_analysis():
     length = 1000   
     t0 = 1000       
-    steps = 2000    
+    steps = 1000   
     base_target_density = 0.2  
     interval_size = 20 
     
-    # Parameter ranges
+    # parameter ranges
     random_brake_params = np.linspace(0, 0.6, 20)  
-    overtake_params = np.linspace(0, 1.0, 20)      
+    overtake_params = np.linspace(0, 1, 20)      
     vmax_offsets = [-2, -1, 0, 1, 2]             
     density_params = np.linspace(0.01, 0.09, 20)
     boost_chance_params = np.linspace(0.1, 0.09, 20)
-    return_rate_params = np.linspace(0, 1.0, 20)
+    return_rate_params = np.linspace(0, 1, 20)
+    ratio_combinations = []
     
-    # Storage for results
+    for i in range(0, 11):
+        for j in range(0, 11 - i):
+            k = 10 - i - j
+            ratio_combinations.append((round(i * 0.1, 1), round(j * 0.1, 1), round(k * 0.1, 1)))
+            
+    # stor results
     random_brake_results = []
     overtake_results = []
     vmax_results = []
@@ -404,6 +456,7 @@ def run_sensitivity_analysis():
     actual_densities = []
     boost_chance_results = []
     return_rate_results = []
+    ratio_results = []
     
     # effect of random braking probability
     for random_brake in random_brake_params:
@@ -417,7 +470,7 @@ def run_sensitivity_analysis():
         
         avg_flow = np.mean(flows)
         random_brake_results.append(avg_flow)
-        print(f"Random brake chance = {random_brake}, Average flow = {avg_flow:.4f}")
+        print(f"Random brake chance = {random_brake:.4f}, Average flow = {avg_flow:.4f}")
     
     # effect of overtake rate
     for overtake_rate in overtake_params:
@@ -431,7 +484,7 @@ def run_sensitivity_analysis():
         
         avg_flow = np.mean(flows)
         overtake_results.append(avg_flow)
-        print(f"Overtake rate = {overtake_rate}, Average flow = {avg_flow:.4f}")
+        print(f"Overtake rate = {overtake_rate:.4f}, Average flow = {avg_flow:.4f}")
     
     # effect of maximum velocity
     for vmax_offset in vmax_offsets:
@@ -460,7 +513,7 @@ def run_sensitivity_analysis():
         actual_density = np.mean(densities)
         actual_densities.append(actual_density)
         density_results.append(avg_flow)
-        print(f"Actual density = {actual_density}, Average flow = {avg_flow:.4f}")
+        print(f"Actual density = {actual_density:.4f}, Average flow = {avg_flow:.4f}")
     
     # effect of boost chance
     for boost_chance in boost_chance_params:
@@ -474,7 +527,7 @@ def run_sensitivity_analysis():
         
         avg_flow = np.mean(flows)
         boost_chance_results.append(avg_flow)
-        print(f"Boost chance = {boost_chance}, Average flow = {avg_flow:.4f}")
+        print(f"Boost chance = {boost_chance:.4f}, Average flow = {avg_flow:.4f}")
     
     # effect of return rate
     for return_rate in return_rate_params:
@@ -488,10 +541,27 @@ def run_sensitivity_analysis():
         
         avg_flow = np.mean(flows)
         return_rate_results.append(avg_flow)
-        print(f"Return rate = {return_rate}, Average flow = {avg_flow:.4f}")
+        print(f"Return rate = {return_rate:.4f}, Average flow = {avg_flow:.4f}")
     
-
+    # effect of ratio
+    for lorry_ratio, regular_ratio, fast_ratio in ratio_combinations:
+        modified_driver_types = copy.deepcopy(DRIVER_TYPES)
+        
+        modified_driver_types[0]['spawn_weight'] = lorry_ratio
+        modified_driver_types[1]['spawn_weight'] = regular_ratio
+        modified_driver_types[2]['spawn_weight'] = fast_ratio
+        
+        flows, _, _, _ = simulate_traffic_with_density_control(
+            length, t0, steps, base_target_density, interval_size, 
+            driver_types_dict=modified_driver_types)
+        
+        avg_flow = np.mean(flows)
+        ratio_results.append((lorry_ratio, regular_ratio, fast_ratio, avg_flow))
+        print(f"Lorry={lorry_ratio:.1f}, Regular={regular_ratio:.1f}, Fast={fast_ratio:.1f}, Flow={avg_flow:.5f}")
+    
+    # generating plots
     plt.figure(figsize=(24, 16))
+    
     # brake
     plt.subplot(2, 3, 1)
     plt.plot(random_brake_params, random_brake_results, 'o', color='red')
@@ -550,17 +620,9 @@ def run_sensitivity_analysis():
     plt.tight_layout()
     plt.savefig('sensitivity_analysis_results.png')
     
-    
+    plot_vehicle_ratio(ratio_results)
 
-    # Return results for further analysis
-    return {
-        'random_brake': (random_brake_params, random_brake_results),
-        'overtake_rate': (overtake_params, overtake_results),
-        'vmax_offset': (vmax_offsets, vmax_results),
-        'density': (actual_densities, density_results),
-        'boost_chance': (boost_chance_params, boost_chance_results),
-        'return_rate': (return_rate_params, return_rate_results),
-    }
+    return 
 
 def compare_brake_chances():
     length = 1000   
@@ -676,6 +738,7 @@ def compare_brake_chances():
     }
 
 def main():
+    
     print("start")
     
     run_sensitivity_analysis()
