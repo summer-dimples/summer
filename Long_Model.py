@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 import copy
 
-np.random.seed(32)
+np.random.seed(2532)
 
 
 # dict to store different driver type(can also be used for reaction/...)
@@ -384,17 +384,17 @@ def run_sensitivity_analysis():
 
     length = 1000   
     t0 = 1000       
-    steps = 1500    
+    steps = 2000    
     base_target_density = 0.2  
     interval_size = 20 
     
     # Parameter ranges
-    random_brake_params = np.linspace(0, 0.6, 11)  
-    overtake_params = np.linspace(0, 1.0, 11)      
+    random_brake_params = np.linspace(0, 0.6, 20)  
+    overtake_params = np.linspace(0, 1.0, 20)      
     vmax_offsets = [-2, -1, 0, 1, 2]             
-    density_params = np.linspace(0.01, 0.11, 11)
-    boost_chance_params = np.linspace(0.1, 0.9, 9)
-    return_rate_params = np.linspace(0, 1.0, 11)
+    density_params = np.linspace(0.01, 0.09, 20)
+    boost_chance_params = np.linspace(0.1, 0.09, 20)
+    return_rate_params = np.linspace(0, 1.0, 20)
     
     # Storage for results
     random_brake_results = []
@@ -407,10 +407,10 @@ def run_sensitivity_analysis():
     
     # effect of random braking probability
     for random_brake in random_brake_params:
-
         modified_driver_types = copy.deepcopy(DRIVER_TYPES)
-        modified_driver_types['random_brake_chance'] = random_brake 
-        
+        for vehicle_type in modified_driver_types.values():
+            vehicle_type['random_brake_chance'] = random_brake
+            
         flows, _, _, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
@@ -422,7 +422,8 @@ def run_sensitivity_analysis():
     # effect of overtake rate
     for overtake_rate in overtake_params:
         modified_driver_types = copy.deepcopy(DRIVER_TYPES)
-        modified_driver_types['overtake_rate'] = overtake_rate  
+        for vehicle_type in modified_driver_types.values():
+            vehicle_type['overtake_rate'] = overtake_rate
         
         flows, _, _, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
@@ -491,44 +492,55 @@ def run_sensitivity_analysis():
     
 
     plt.figure(figsize=(24, 16))
-    
+    # brake
     plt.subplot(2, 3, 1)
-    plt.plot(random_brake_params, random_brake_results, 'o-', color='blue')
+    plt.plot(random_brake_params, random_brake_results, 'o', color='red')
+    plt.plot(random_brake_params, random_brake_results, '-', color='black')
     plt.xlabel('Random Brake Probability')
     plt.ylabel('Average Flow')
     plt.title('Impact of Random Brake Probability on Flow')
     plt.grid(True)
     
+    # overtake
     plt.subplot(2, 3, 2)
-    plt.plot(overtake_params, overtake_results, 'o-', color='green')
+    plt.plot(overtake_params, overtake_results, 'o', color='red')
+    plt.plot(overtake_params, overtake_results, '-', color='black')
     plt.xlabel('Overtake Rate')
     plt.ylabel('Average Flow')
     plt.title('Impact of Overtake Rate on Flow')
     plt.grid(True)
     
+    # vmax
     plt.subplot(2, 3, 3)
-    plt.plot(vmax_offsets, vmax_results, 'o-', color='red')
+    plt.plot(vmax_offsets, vmax_results, 'o', color='red')
+    plt.plot(vmax_offsets, vmax_results, '-', color='black')
     plt.xlabel('Maximum Velocity')
     plt.ylabel('Average Flow')
     plt.title('Impact of Maximum Velocity on Flow')
     plt.grid(True)
     
+    # density
     plt.subplot(2, 3, 4)
-    plt.plot(actual_densities, density_results, 'o-', color='purple')
+    plt.plot(actual_densities, density_results, 'o', color='red')
+    plt.plot(actual_densities, density_results, '-', color='black')
     plt.xlabel('Density')
     plt.ylabel('Average Flow')
     plt.title('Impact of Density on Flow')
     plt.grid(True)
     
+    # boost
     plt.subplot(2, 3, 5)
-    plt.plot(boost_chance_params, boost_chance_results, 'o-', color='blue')
+    plt.plot(boost_chance_params, boost_chance_results, 'o', color='red')
+    plt.plot(boost_chance_params, boost_chance_results, '-', color='black')
     plt.xlabel('Boost Chance')
     plt.ylabel('Average Flow')
     plt.title('Impact of Boost Chance on Flow')
     plt.grid(True)
     
+    # return
     plt.subplot(2, 3, 6)
-    plt.plot(return_rate_params, return_rate_results, 'o-', color='green')
+    plt.plot(return_rate_params, return_rate_results, 'o', color='red')
+    plt.plot(return_rate_params, return_rate_results, '-', color='black')
     plt.xlabel('Return Rate')
     plt.ylabel('Average Flow')
     plt.title('Impact of Return Rate on Flow')
@@ -536,7 +548,7 @@ def run_sensitivity_analysis():
     
     
     plt.tight_layout()
-    plt.savefig('1.png')
+    plt.savefig('sensitivity_analysis_results.png')
     
     
 
@@ -553,7 +565,7 @@ def run_sensitivity_analysis():
 def compare_brake_chances():
     length = 1000   
     t0 = 1000       
-    steps = 1500     
+    steps = 2000     
     interval_size = 20 
     
     
@@ -663,16 +675,11 @@ def compare_brake_chances():
         'avg_lane_changes': avg_lane_changes
     }
 
-
 def main():
-
     print("start")
     
-    results_1 = run_sensitivity_analysis()
-    # comparing brake chances
-    print("Comparing brake chances")
-    results_2 = compare_brake_chances()
-    
+    run_sensitivity_analysis()
+
     print("finished")
 
 if __name__ == "__main__":
