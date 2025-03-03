@@ -1,0 +1,174 @@
+(base) PS E:\AGP> & e:/AGP/env/CW3/Scripts/python.exe e:/AGP/summer/Long_Model.py
+start
+Random brake chance = 0.0000, Average flow = 1.1933
+Random brake chance = 0.0316, Average flow = 1.2081
+Random brake chance = 0.0632, Average flow = 1.1856
+Random brake chance = 0.0947, Average flow = 1.2164
+Random brake chance = 0.1263, Average flow = 1.2009
+Random brake chance = 0.1579, Average flow = 1.1967
+Random brake chance = 0.1895, Average flow = 1.1867
+Random brake chance = 0.2211, Average flow = 1.2065
+Random brake chance = 0.2526, Average flow = 1.1894
+Random brake chance = 0.2842, Average flow = 1.1986
+Random brake chance = 0.3158, Average flow = 1.1876
+Random brake chance = 0.3474, Average flow = 1.1986
+Random brake chance = 0.3789, Average flow = 1.1990
+Random brake chance = 0.4105, Average flow = 1.1968
+Random brake chance = 0.4421, Average flow = 1.2004
+Random brake chance = 0.4737, Average flow = 1.2053
+Random brake chance = 0.5053, Average flow = 1.2000
+Random brake chance = 0.5368, Average flow = 1.2161
+Random brake chance = 0.5684, Average flow = 1.1945
+Random brake chance = 0.6000, Average flow = 1.2004
+Overtake rate = 0.0000, Average flow = 1.1894
+Overtake rate = 0.0526, Average flow = 1.1887
+Overtake rate = 0.1053, Average flow = 1.1966
+Overtake rate = 0.1579, Average flow = 1.1890
+Overtake rate = 0.2105, Average flow = 1.1920
+Overtake rate = 0.2632, Average flow = 1.2005
+Overtake rate = 0.3158, Average flow = 1.2106
+Overtake rate = 0.3684, Average flow = 1.2130
+Overtake rate = 0.4211, Average flow = 1.1735
+Overtake rate = 0.4737, Average flow = 1.2111
+Overtake rate = 0.5263, Average flow = 1.1718
+Overtake rate = 0.5789, Average flow = 1.1908
+Overtake rate = 0.6316, Average flow = 1.1914
+Overtake rate = 0.6842, Average flow = 1.1883
+Overtake rate = 0.7368, Average flow = 1.1978
+Overtake rate = 0.7895, Average flow = 1.1817
+Overtake rate = 0.8421, Average flow = 1.1941
+Overtake rate = 0.8947, Average flow = 1.1913
+Overtake rate = 0.9474, Average flow = 1.2017
+Overtake rate = 1.0000, Average flow = 1.2028
+Vmax offset = -2, Average flow = 1.2105
+Vmax offset = -1, Average flow = 1.2035
+Vmax offset = 0, Average flow = 1.1909
+Vmax offset = 1, Average flow = 1.1825
+Vmax offset = 2, Average flow = 1.2058
+Actual density = 0.0100, Average flow = 0.1832
+Actual density = 0.0145, Average flow = 0.2640
+Actual density = 0.0185, Average flow = 0.3314
+Actual density = 0.0230, Average flow = 0.4117
+Actual density = 0.0269, Average flow = 0.4738
+Actual density = 0.0314, Average flow = 0.5521
+Actual density = 0.0354, Average flow = 0.6102
+Actual density = 0.0394, Average flow = 0.6922
+Actual density = 0.0437, Average flow = 0.7198
+Actual density = 0.0478, Average flow = 0.8047
+Actual density = 0.0520, Average flow = 0.8590
+Actual density = 0.0555, Average flow = 0.8750
+Actual density = 0.0595, Average flow = 0.9520
+Actual density = 0.0629, Average flow = 0.9700
+Actual density = 0.0668, Average flow = 1.0169
+Actual density = 0.0706, Average flow = 1.0995
+Actual density = 0.0734, Average flow = 1.1040
+Actual density = 0.0755, Average flow = 1.1381
+Actual density = 0.0770, Average flow = 1.1457
+Actual density = 0.0769, Average flow = 1.1189
+Boost chance = 0.1000, Average flow = 1.2053
+Boost chance = 0.1421, Average flow = 1.1922
+Boost chance = 0.1842, Average flow = 1.1901
+Boost chance = 0.2263, Average flow = 1.1998
+Boost chance = 0.2684, Average flow = 1.2134
+Boost chance = 0.3105, Average flow = 1.2029
+Boost chance = 0.3526, Average flow = 1.1799
+Boost chance = 0.3947, Average flow = 1.2106
+Boost chance = 0.4368, Average flow = 1.1907
+Boost chance = 0.4789, Average flow = 1.1835
+Boost chance = 0.5211, Average flow = 1.2084
+Boost chance = 0.5632, Average flow = 1.2023
+Boost chance = 0.6053, Average flow = 1.1940
+Boost chance = 0.6474, Average flow = 1.1933
+Boost chance = 0.6895, Average flow = 1.1666
+Boost chance = 0.7316, Average flow = 1.2062
+Boost chance = 0.7737, Average flow = 1.2061
+Boost chance = 0.8158, Average flow = 1.1903
+Boost chance = 0.8579, Average flow = 1.1852
+Boost chance = 0.9000, Average flow = 1.2123
+Return rate = 0.0000, Average flow = 1.1964
+Return rate = 0.0526, Average flow = 1.2077
+Return rate = 0.1053, Average flow = 1.2030
+Return rate = 0.1579, Average flow = 1.1969
+Return rate = 0.2105, Average flow = 1.1967
+Return rate = 0.2632, Average flow = 1.1892
+Return rate = 0.3158, Average flow = 1.1871
+Return rate = 0.3684, Average flow = 1.2139
+Return rate = 0.4211, Average flow = 1.2075
+Return rate = 0.4737, Average flow = 1.2173
+Return rate = 0.5263, Average flow = 1.2020
+Return rate = 0.5789, Average flow = 1.2059
+Return rate = 0.6316, Average flow = 1.2119
+Return rate = 0.6842, Average flow = 1.1842
+Return rate = 0.7368, Average flow = 1.2112
+Return rate = 0.7895, Average flow = 1.2143
+Return rate = 0.8421, Average flow = 1.1938
+Return rate = 0.8947, Average flow = 1.1936
+Return rate = 0.9474, Average flow = 1.1764
+Return rate = 1.0000, Average flow = 1.1949
+Lorry=0.0, Regular=0.0, Fast=1.0, Flow=1.19486
+Lorry=0.0, Regular=0.1, Fast=0.9, Flow=1.19767
+Lorry=0.0, Regular=0.2, Fast=0.8, Flow=1.21845
+Lorry=0.0, Regular=0.3, Fast=0.7, Flow=1.20988
+Lorry=0.0, Regular=0.4, Fast=0.6, Flow=1.19430
+Lorry=0.0, Regular=0.5, Fast=0.5, Flow=1.18544
+Lorry=0.0, Regular=0.6, Fast=0.4, Flow=1.19360
+Lorry=0.0, Regular=0.7, Fast=0.3, Flow=1.20163
+Lorry=0.0, Regular=0.8, Fast=0.2, Flow=1.21765
+Lorry=0.0, Regular=0.9, Fast=0.1, Flow=1.18067
+Lorry=0.0, Regular=1.0, Fast=0.0, Flow=1.22279
+Lorry=0.1, Regular=0.0, Fast=0.9, Flow=1.21086
+Lorry=0.1, Regular=0.1, Fast=0.8, Flow=1.21219
+Lorry=0.1, Regular=0.2, Fast=0.7, Flow=1.20598
+Lorry=0.1, Regular=0.3, Fast=0.6, Flow=1.20269
+Lorry=0.1, Regular=0.4, Fast=0.5, Flow=1.20817
+Lorry=0.1, Regular=0.5, Fast=0.4, Flow=1.21074
+Lorry=0.1, Regular=0.6, Fast=0.3, Flow=1.19942
+Lorry=0.1, Regular=0.7, Fast=0.2, Flow=1.19344
+Lorry=0.1, Regular=0.8, Fast=0.1, Flow=1.18858
+Lorry=0.1, Regular=0.9, Fast=0.0, Flow=1.19032
+Lorry=0.2, Regular=0.0, Fast=0.8, Flow=1.18990
+Lorry=0.2, Regular=0.1, Fast=0.7, Flow=1.21118
+Lorry=0.2, Regular=0.2, Fast=0.6, Flow=1.20377
+Lorry=0.2, Regular=0.3, Fast=0.5, Flow=1.20189
+Lorry=0.2, Regular=0.4, Fast=0.4, Flow=1.20325
+Lorry=0.2, Regular=0.5, Fast=0.3, Flow=1.20807
+Lorry=0.2, Regular=0.6, Fast=0.2, Flow=1.21349
+Lorry=0.2, Regular=0.7, Fast=0.1, Flow=1.20165
+Lorry=0.2, Regular=0.8, Fast=0.0, Flow=1.18177
+Lorry=0.3, Regular=0.0, Fast=0.7, Flow=1.20544
+Lorry=0.3, Regular=0.1, Fast=0.6, Flow=1.19602
+Lorry=0.3, Regular=0.2, Fast=0.5, Flow=1.19741
+Lorry=0.3, Regular=0.3, Fast=0.4, Flow=1.20171
+Lorry=0.3, Regular=0.4, Fast=0.3, Flow=1.18597
+Lorry=0.3, Regular=0.5, Fast=0.2, Flow=1.19986
+Lorry=0.3, Regular=0.6, Fast=0.1, Flow=1.20243
+Lorry=0.3, Regular=0.7, Fast=0.0, Flow=1.18611
+Lorry=0.4, Regular=0.0, Fast=0.6, Flow=1.20787
+Lorry=0.4, Regular=0.1, Fast=0.5, Flow=1.17372
+Lorry=0.4, Regular=0.2, Fast=0.4, Flow=1.20060
+Lorry=0.4, Regular=0.3, Fast=0.3, Flow=1.19761
+Lorry=0.4, Regular=0.4, Fast=0.2, Flow=1.19980
+Lorry=0.4, Regular=0.5, Fast=0.1, Flow=1.21273
+Lorry=0.4, Regular=0.6, Fast=0.0, Flow=1.20636
+Lorry=0.5, Regular=0.0, Fast=0.5, Flow=1.21004
+Lorry=0.5, Regular=0.1, Fast=0.4, Flow=1.19285
+Lorry=0.5, Regular=0.2, Fast=0.3, Flow=1.20562
+Lorry=0.5, Regular=0.3, Fast=0.2, Flow=1.18332
+Lorry=0.5, Regular=0.4, Fast=0.1, Flow=1.20275
+Lorry=0.5, Regular=0.5, Fast=0.0, Flow=1.20100
+Lorry=0.6, Regular=0.0, Fast=0.4, Flow=1.20500
+Lorry=0.6, Regular=0.1, Fast=0.3, Flow=1.19892
+Lorry=0.6, Regular=0.2, Fast=0.2, Flow=1.18902
+Lorry=0.6, Regular=0.3, Fast=0.1, Flow=1.18418
+Lorry=0.6, Regular=0.4, Fast=0.0, Flow=1.21971
+Lorry=0.7, Regular=0.0, Fast=0.3, Flow=1.20171
+Lorry=0.7, Regular=0.1, Fast=0.2, Flow=1.19277
+Lorry=0.7, Regular=0.2, Fast=0.1, Flow=1.20922
+Lorry=0.7, Regular=0.3, Fast=0.0, Flow=1.18797
+Lorry=0.8, Regular=0.0, Fast=0.2, Flow=1.20661
+Lorry=0.8, Regular=0.1, Fast=0.1, Flow=1.19472
+Lorry=0.8, Regular=0.2, Fast=0.0, Flow=1.17695
+Lorry=0.9, Regular=0.0, Fast=0.1, Flow=1.17655
+Lorry=0.9, Regular=0.1, Fast=0.0, Flow=1.17753
+Lorry=1.0, Regular=0.0, Fast=0.0, Flow=1.21223
+finished

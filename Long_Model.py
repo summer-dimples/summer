@@ -4,7 +4,8 @@ from tqdm import tqdm
 import copy
 import matplotlib.tri as tri
 
-np.random.seed(2532)
+np.random.seed(3)
+
 
 # dict to store different driver type(can also be used for reaction/...)
 # make sure sapwn_weight sum up to 1
@@ -429,8 +430,8 @@ def plot_vehicle_ratio(ratio_results):
 
 def run_sensitivity_analysis():
     length = 1000   
-    t0 = 1000       
-    steps = 1000   
+    t0 = 1500       
+    steps = 5000   
     base_target_density = 0.2  
     interval_size = 20 
     
@@ -439,7 +440,7 @@ def run_sensitivity_analysis():
     overtake_params = np.linspace(0, 1, 20)      
     vmax_offsets = [-2, -1, 0, 1, 2]             
     density_params = np.linspace(0.01, 0.09, 20)
-    boost_chance_params = np.linspace(0.1, 0.09, 20)
+    boost_chance_params = np.linspace(0.1, 0.9, 20)
     return_rate_params = np.linspace(0, 1, 20)
     ratio_combinations = []
     
@@ -626,7 +627,7 @@ def run_sensitivity_analysis():
 
 def compare_brake_chances():
     length = 1000   
-    t0 = 1000       
+    t0 = 1500       
     steps = 2000     
     interval_size = 20 
     
@@ -738,11 +739,10 @@ def compare_brake_chances():
     }
 
 def main():
-    
     print("start")
     
     run_sensitivity_analysis()
-
+    
     print("finished")
 
 if __name__ == "__main__":
