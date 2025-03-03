@@ -429,11 +429,11 @@ def plot_vehicle_ratio(ratio_results):
     return 
 
 def run_sensitivity_analysis():
-    length = 1000   
+    length = 1500   
     t0 = 1500       
     steps = 5000   
     base_target_density = 0.2  
-    interval_size = 20 
+    interval_size = 50 
     
     # parameter ranges
     random_brake_params = np.linspace(0, 0.6, 20)  
