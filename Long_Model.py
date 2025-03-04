@@ -14,7 +14,7 @@ DRIVER_TYPES = {
         'vmax': 3,
         'overtake_rate': 0,    
         'return_rate': 1,
-        'spawn_weight': 0.1,
+        'spawn_weight': 0.2,
         'boost_chance': 0.3,    # this can be used to simulate the need time for boost?(for example, 0.5 means average 2 timestep before boost)
         'boosted_vmax': 5,
         'random_brake_chance' : 0.3      
@@ -23,10 +23,10 @@ DRIVER_TYPES = {
         'vmax': 5,
         'overtake_rate': 0.5,    
         'return_rate': 0.5,     
-        'spawn_weight': 0.7,
+        'spawn_weight': 0.6,
         'boost_chance': 0.3,   
         'boosted_vmax': 7,
-        'random_brake_chance' : 0.3     
+        'random_brake_chance' : 0.2     
     },
     2: {  # Fast Cars
         'vmax': 7,
@@ -35,7 +35,7 @@ DRIVER_TYPES = {
         'spawn_weight':0.2,
         'boost_chance': 0.3,    
         'boosted_vmax': 9,
-        'random_brake_chance' : 0.3        
+        'random_brake_chance' : 0        
     }
 }
 
@@ -381,20 +381,21 @@ def simulate_traffic_with_density_control(length, t0, steps, target_density, int
         
     return flows, densities, velocities, lane_change_rates
 
+# function for generating vehicle ratio plot
 def plot_vehicle_ratio(ratio_results):
     lorry_ratios = [result[0] for result in ratio_results]
     regular_ratios = [result[1] for result in ratio_results]
     fast_ratios = [result[2] for result in ratio_results]
     flow_values = [result[3] for result in ratio_results]
+    velocity_values = [result[4] for result in ratio_results]
     
-    fig = plt.figure(figsize=(10, 8))
-    ax = fig.add_subplot(111)
+    fig, axs = plt.subplots(1, 2, figsize=(20, 10))
     
     corners = np.array([[0, 0], [1, 0], [0.5, 0.75**0.5]])
     triangle = tri.Triangulation(corners[:, 0], corners[:, 1])
     
-    ax.triplot(triangle, '-')
-
+    # flow
+    axs[0].triplot(triangle, '-')
     x_values = []
     y_values = []
     for l, r, f in zip(lorry_ratios, regular_ratios, fast_ratios):
@@ -405,36 +406,60 @@ def plot_vehicle_ratio(ratio_results):
         
     cmap = plt.cm.viridis
     
-    scatter = ax.scatter(x_values, y_values, c=flow_values, cmap=cmap, s=300, edgecolors='k', zorder=3)
+    scatter_flow = axs[0].scatter(x_values, y_values, c=flow_values, cmap=cmap, s=300, edgecolors='k', zorder=3)
     
-    cbar = plt.colorbar(scatter, ax=ax)
-    cbar.set_label('Flow')
+    cbar1 = plt.colorbar(scatter_flow, ax=axs[0], shrink=0.7)
+    cbar1.set_label('Flow', fontsize=16)
     
     # adding labels
-    ax.text(corners[0,0]-0.05, corners[0,1]-0.05, 'Lorry (100%)', fontsize=12)
-    ax.text(corners[1,0]-0.05, corners[1,1]-0.05, 'Regular (100%)', fontsize=12)
-    ax.text(corners[2,0]-0.05, corners[2,1]+0.05, 'Fast (100%)', fontsize=12)
+    axs[0].text(corners[0,0]-0.1, corners[0,1]-0.05, 'Lorry (100%)', fontsize=14)
+    axs[0].text(corners[1,0]-0.05, corners[1,1]-0.05, 'Regular (100%)', fontsize=14)
+    axs[0].text(corners[2,0]-0.05, corners[2,1]+0.05, 'Fast (100%)', fontsize=14)
     
     # adding flow values
     for (x, y, flow) in zip(x_values, y_values, flow_values):
-        ax.text(x, y+0.02, f'{flow:.2f}', ha='center', fontsize=10)
+        axs[0].text(x, y+0.02, f'{flow:.2f}', ha='center', fontsize=14)
 
-    ax.set_xlim(-0.1, 1.1)
-    ax.set_ylim(-0.1, 0.9)
-    ax.axis('off')
+    axs[0].set_xlim(-0.1, 1.1)
+    axs[0].set_ylim(-0.1, 0.9)
+    axs[0].axis('off')
      
-    plt.tight_layout()
+     
+    # velocities
+    axs[1].triplot(triangle, '-')
+    scatter_velocity = axs[1].scatter(x_values, y_values, c=velocity_values, cmap=cmap, s=300, edgecolors='k', zorder=3)
+    
+    cbar2 = plt.colorbar(scatter_velocity, ax=axs[1], shrink=0.7)
+    cbar2.set_label('Velocity', fontsize=16)
+
+    
+    # adding labels
+    axs[1].text(corners[0,0]-0.1, corners[0,1]-0.05, 'Lorry (100%)', fontsize=14)
+    axs[1].text(corners[1,0]-0.05, corners[1,1]-0.05, 'Regular (100%)', fontsize=14)
+    axs[1].text(corners[2,0]-0.05, corners[2,1]+0.05, 'Fast (100%)', fontsize=14)
+    
+    # adding velocity values
+    for (x, y, vel) in zip(x_values, y_values, velocity_values):
+        axs[1].text(x, y+0.02, f'{vel:.2f}', ha='center', fontsize=14)
+
+    axs[1].set_xlim(-0.1, 1.1)
+    axs[1].set_ylim(-0.1, 0.9)
+    axs[1].axis('off')
+     
+    plt.tight_layout(pad=5.0, w_pad=4.0)
     plt.savefig('vehicle_ratio_ternary.png')
     
-    return 
+    return
 
+# sensitive analysis
 def run_sensitivity_analysis():
+    
     length = 1500   
     t0 = 1500       
     steps = 5000   
     base_target_density = 0.2  
     interval_size = 50 
-    
+
     # parameter ranges
     random_brake_params = np.linspace(0, 0.6, 20)  
     overtake_params = np.linspace(0, 1, 20)      
@@ -459,19 +484,28 @@ def run_sensitivity_analysis():
     return_rate_results = []
     ratio_results = []
     
+    random_brake_velocities = []
+    overtake_velocities = []
+    vmax_velocities = []
+    density_velocities = []
+    boost_chance_velocities = []
+    return_rate_velocities = []
+    
     # effect of random braking probability
     for random_brake in random_brake_params:
         modified_driver_types = copy.deepcopy(DRIVER_TYPES)
         for vehicle_type in modified_driver_types.values():
             vehicle_type['random_brake_chance'] = random_brake
             
-        flows, _, _, _ = simulate_traffic_with_density_control(
+        flows, _, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
         
         avg_flow = np.mean(flows)
+        avg_velocities = np.mean(velocities)
         random_brake_results.append(avg_flow)
-        print(f"Random brake chance = {random_brake:.4f}, Average flow = {avg_flow:.4f}")
+        random_brake_velocities.append(avg_velocities)
+        print(f"Random brake chance = {random_brake:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of overtake rate
     for overtake_rate in overtake_params:
@@ -479,13 +513,15 @@ def run_sensitivity_analysis():
         for vehicle_type in modified_driver_types.values():
             vehicle_type['overtake_rate'] = overtake_rate
         
-        flows, _, _, _ = simulate_traffic_with_density_control(
+        flows, _, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
         
         avg_flow = np.mean(flows)
+        avg_velocities = np.mean(velocities)
         overtake_results.append(avg_flow)
-        print(f"Overtake rate = {overtake_rate:.4f}, Average flow = {avg_flow:.4f}")
+        overtake_velocities.append(avg_velocities)
+        print(f"Overtake rate = {overtake_rate:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of maximum velocity
     for vmax_offset in vmax_offsets:
@@ -496,25 +532,30 @@ def run_sensitivity_analysis():
             vehicle_type['vmax'] = original_vmax + vmax_offset
             vehicle_type['boosted_vmax'] = vehicle_type['boosted_vmax'] + vmax_offset
         
-        flows, _, _, _ = simulate_traffic_with_density_control(
+        flows, _, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
         
         avg_flow = np.mean(flows)
+        avg_velocities = np.mean(velocities)
         vmax_results.append(avg_flow)
-        print(f"Vmax offset = {vmax_offset}, Average flow = {avg_flow:.4f}")
+        vmax_velocities.append(avg_velocities)
+        print(f"Vmax offset = {vmax_offset}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of target density
     for density in density_params:
-        flows, densities, _, _ = simulate_traffic_with_density_control(
+        flows, densities, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, density, interval_size, 
             driver_types_dict=DRIVER_TYPES)
         
         avg_flow = np.mean(flows)
         actual_density = np.mean(densities)
+        avg_velocities = np.mean(velocities)
+        
         actual_densities.append(actual_density)
         density_results.append(avg_flow)
-        print(f"Actual density = {actual_density:.4f}, Average flow = {avg_flow:.4f}")
+        density_velocities.append(avg_velocities)
+        print(f"Actual density = {actual_density:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of boost chance
     for boost_chance in boost_chance_params:
@@ -522,13 +563,16 @@ def run_sensitivity_analysis():
         for vehicle_type in modified_driver_types.values():
             vehicle_type['boost_chance'] = boost_chance
         
-        flows, _, _, _ = simulate_traffic_with_density_control(
+        flows, _, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
         
         avg_flow = np.mean(flows)
+        avg_velocities = np.mean(velocities)
+        
         boost_chance_results.append(avg_flow)
-        print(f"Boost chance = {boost_chance:.4f}, Average flow = {avg_flow:.4f}")
+        boost_chance_velocities.append(avg_velocities)
+        print(f"Boost chance = {boost_chance:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of return rate
     for return_rate in return_rate_params:
@@ -536,13 +580,16 @@ def run_sensitivity_analysis():
         for vehicle_type in modified_driver_types.values():
             vehicle_type['return_rate'] = return_rate
         
-        flows, _, _, _ = simulate_traffic_with_density_control(
+        flows, _, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
         
         avg_flow = np.mean(flows)
+        avg_velocities = np.mean(velocities)
+        
         return_rate_results.append(avg_flow)
-        print(f"Return rate = {return_rate:.4f}, Average flow = {avg_flow:.4f}")
+        return_rate_velocities.append(avg_velocities)
+        print(f"Return rate = {return_rate:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of ratio
     for lorry_ratio, regular_ratio, fast_ratio in ratio_combinations:
@@ -552,70 +599,70 @@ def run_sensitivity_analysis():
         modified_driver_types[1]['spawn_weight'] = regular_ratio
         modified_driver_types[2]['spawn_weight'] = fast_ratio
         
-        flows, _, _, _ = simulate_traffic_with_density_control(
+        flows, _, velocities, _ = simulate_traffic_with_density_control(
             length, t0, steps, base_target_density, interval_size, 
             driver_types_dict=modified_driver_types)
         
         avg_flow = np.mean(flows)
-        ratio_results.append((lorry_ratio, regular_ratio, fast_ratio, avg_flow))
-        print(f"Lorry={lorry_ratio:.1f}, Regular={regular_ratio:.1f}, Fast={fast_ratio:.1f}, Flow={avg_flow:.5f}")
+        avg_velocities = np.mean(velocities)
+        ratio_results.append((lorry_ratio, regular_ratio, fast_ratio, avg_flow, avg_velocities))
+        print(f"Lorry={lorry_ratio:.1f}, Regular={regular_ratio:.1f}, Fast={fast_ratio:.1f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
-    # generating plots
-    plt.figure(figsize=(24, 16))
+    fig, axs = plt.subplots(2, 3, figsize=(24, 16))
     
     # brake
-    plt.subplot(2, 3, 1)
-    plt.plot(random_brake_params, random_brake_results, 'o', color='red')
-    plt.plot(random_brake_params, random_brake_results, '-', color='black')
-    plt.xlabel('Random Brake Probability')
-    plt.ylabel('Average Flow')
-    plt.title('Impact of Random Brake Probability on Flow')
-    plt.grid(True)
+    axs[0,0].plot(random_brake_params, random_brake_results, 'o-', label='Average Flow', color='red')
+    axs[0,0].plot(random_brake_params, random_brake_velocities, 'o-', label='Average Velocities', color='blue')
+    axs[0,0].set_xlabel('Random Brake Probability')
+    axs[0,0].set_ylabel('Values')
+    axs[0,0].set_title('Impact of Random Brake Probability on Flow and Velocities')
+    axs[0,0].grid(True)
+    axs[0,0].legend()
     
     # overtake
-    plt.subplot(2, 3, 2)
-    plt.plot(overtake_params, overtake_results, 'o', color='red')
-    plt.plot(overtake_params, overtake_results, '-', color='black')
-    plt.xlabel('Overtake Rate')
-    plt.ylabel('Average Flow')
-    plt.title('Impact of Overtake Rate on Flow')
-    plt.grid(True)
-    
+    axs[0,1].plot(overtake_params, overtake_results, 'o-', label='Average Flow', color='red')
+    axs[0,1].plot(overtake_params, overtake_velocities, 'o-', label='Average Velocities', color='blue')
+    axs[0,1].set_xlabel('Overtake Rate')
+    axs[0,1].set_ylabel('Values')
+    axs[0,1].set_title('Impact of Overtake Rate on Flow and Velocities')
+    axs[0,1].grid(True)
+    axs[0,1].legend()
+
     # vmax
-    plt.subplot(2, 3, 3)
-    plt.plot(vmax_offsets, vmax_results, 'o', color='red')
-    plt.plot(vmax_offsets, vmax_results, '-', color='black')
-    plt.xlabel('Maximum Velocity')
-    plt.ylabel('Average Flow')
-    plt.title('Impact of Maximum Velocity on Flow')
-    plt.grid(True)
-    
+    axs[0,2].plot(vmax_offsets, vmax_results, 'o-', label='Average Flow', color='red')
+    axs[0,2].plot(vmax_offsets, vmax_velocities, 'o-', label='Average Velocities', color='blue')
+    axs[0,2].set_xlabel('Maximum Velocity Offset')
+    axs[0,2].set_ylabel('Values')
+    axs[0,2].set_title('Impact of Maximum Velocity on Flow and Velocities')
+    axs[0,2].grid(True)
+    axs[0,2].legend()
+
     # density
-    plt.subplot(2, 3, 4)
-    plt.plot(actual_densities, density_results, 'o', color='red')
-    plt.plot(actual_densities, density_results, '-', color='black')
-    plt.xlabel('Density')
-    plt.ylabel('Average Flow')
-    plt.title('Impact of Density on Flow')
-    plt.grid(True)
-    
+    axs[1,0].plot(actual_densities, density_results, 'o-', label='Average Flow', color='red')
+    axs[1,0].plot(actual_densities, density_velocities, 'o-', label='Average Velocities', color='blue')
+    axs[1,0].set_xlabel('Actual Density')
+    axs[1,0].set_ylabel('Values')
+    axs[1,0].set_title('Impact of Density on Flow and Velocities')
+    axs[1,0].grid(True)
+    axs[1,0].legend()
+
     # boost
-    plt.subplot(2, 3, 5)
-    plt.plot(boost_chance_params, boost_chance_results, 'o', color='red')
-    plt.plot(boost_chance_params, boost_chance_results, '-', color='black')
-    plt.xlabel('Boost Chance')
-    plt.ylabel('Average Flow')
-    plt.title('Impact of Boost Chance on Flow')
-    plt.grid(True)
-    
+    axs[1,1].plot(boost_chance_params, boost_chance_results, 'o-', label='Average Flow', color='red')
+    axs[1,1].plot(boost_chance_params, boost_chance_velocities, 'o-', label='Average Velocities', color='blue')
+    axs[1,1].set_xlabel('Boost Chance')
+    axs[1,1].set_ylabel('Values')
+    axs[1,1].set_title('Impact of Boost Chance on Flow and Velocities')
+    axs[1,1].grid(True)
+    axs[1,1].legend()
+
     # return
-    plt.subplot(2, 3, 6)
-    plt.plot(return_rate_params, return_rate_results, 'o', color='red')
-    plt.plot(return_rate_params, return_rate_results, '-', color='black')
-    plt.xlabel('Return Rate')
-    plt.ylabel('Average Flow')
-    plt.title('Impact of Return Rate on Flow')
-    plt.grid(True)
+    axs[1,2].plot(return_rate_params, return_rate_results, 'o-', label='Average Flow', color='red')
+    axs[1,2].plot(return_rate_params, return_rate_velocities, 'o-', label='Average Velocities', color='blue')
+    axs[1,2].set_xlabel('Return Rate')
+    axs[1,2].set_ylabel('Values')
+    axs[1,2].set_title('Impact of Return Rate on Flow and Velocities')
+    axs[1,2].grid(True)
+    axs[1,2].legend()
     
     
     plt.tight_layout()
@@ -624,6 +671,7 @@ def run_sensitivity_analysis():
     plot_vehicle_ratio(ratio_results)
 
     return 
+
 
 def compare_brake_chances():
     length = 1000   

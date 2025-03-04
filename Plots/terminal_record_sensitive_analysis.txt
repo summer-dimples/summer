@@ -372,4 +372,187 @@ Lorry=0.9, Regular=0.0, Fast=0.1, Flow=1.18718
 Lorry=0.9, Regular=0.1, Fast=0.0, Flow=1.20053
 Lorry=1.0, Regular=0.0, Fast=0.0, Flow=1.17298
 finished
-(base) PS E
+
+
+
+
+# third run
+    length = 1500   
+    t0 = 1500       
+    steps = 5000   
+    base_target_density = 0.2  
+    interval_size = 50 
+
+start
+Random brake chance = 0.0000, Average flow = 1.2078, Average velocities = 3.2689
+Random brake chance = 0.0316, Average flow = 1.2126, Average velocities = 3.3830
+Random brake chance = 0.0632, Average flow = 1.1952, Average velocities = 3.3268
+Random brake chance = 0.0947, Average flow = 1.2156, Average velocities = 3.3851
+Random brake chance = 0.1263, Average flow = 1.1969, Average velocities = 3.4760
+Random brake chance = 0.1579, Average flow = 1.1752, Average velocities = 3.4359
+Random brake chance = 0.1895, Average flow = 1.1667, Average velocities = 3.2745
+Random brake chance = 0.2211, Average flow = 1.1902, Average velocities = 3.2822
+Random brake chance = 0.2526, Average flow = 1.2103, Average velocities = 3.3346
+Random brake chance = 0.2842, Average flow = 1.1914, Average velocities = 3.4173
+Random brake chance = 0.3158, Average flow = 1.2131, Average velocities = 3.3098
+Random brake chance = 0.3474, Average flow = 1.1959, Average velocities = 3.4468
+Random brake chance = 0.3789, Average flow = 1.1981, Average velocities = 3.3236
+Random brake chance = 0.4105, Average flow = 1.1814, Average velocities = 3.3586
+Random brake chance = 0.4421, Average flow = 1.2304, Average velocities = 3.3984
+Random brake chance = 0.4737, Average flow = 1.1826, Average velocities = 3.1810
+Random brake chance = 0.5053, Average flow = 1.1584, Average velocities = 3.4373
+Random brake chance = 0.5368, Average flow = 1.1898, Average velocities = 3.3872
+Random brake chance = 0.5684, Average flow = 1.2241, Average velocities = 3.3665
+Random brake chance = 0.6000, Average flow = 1.1841, Average velocities = 3.4374
+Overtake rate = 0.0000, Average flow = 1.1877, Average velocities = 3.3832
+Overtake rate = 0.0526, Average flow = 1.1680, Average velocities = 3.3209
+Overtake rate = 0.1053, Average flow = 1.2198, Average velocities = 3.3104
+Overtake rate = 0.1579, Average flow = 1.1844, Average velocities = 3.1228
+Overtake rate = 0.2105, Average flow = 1.2113, Average velocities = 3.5488
+Overtake rate = 0.2632, Average flow = 1.1796, Average velocities = 3.2536
+Overtake rate = 0.3158, Average flow = 1.1899, Average velocities = 3.4087
+Overtake rate = 0.3684, Average flow = 1.1851, Average velocities = 3.3352
+Overtake rate = 0.4211, Average flow = 1.2027, Average velocities = 3.3171
+Overtake rate = 0.4737, Average flow = 1.1859, Average velocities = 3.4176
+Overtake rate = 0.5263, Average flow = 1.1884, Average velocities = 3.4795
+Overtake rate = 0.5789, Average flow = 1.1961, Average velocities = 3.3153
+Overtake rate = 0.6316, Average flow = 1.2147, Average velocities = 3.4543
+Overtake rate = 0.6842, Average flow = 1.1734, Average velocities = 3.3056
+Overtake rate = 0.7368, Average flow = 1.2098, Average velocities = 3.4404
+Overtake rate = 0.7895, Average flow = 1.1762, Average velocities = 3.3292
+Overtake rate = 0.8421, Average flow = 1.2085, Average velocities = 3.2788
+Overtake rate = 0.8947, Average flow = 1.1784, Average velocities = 3.2883
+Overtake rate = 0.9474, Average flow = 1.2170, Average velocities = 3.2342
+Overtake rate = 1.0000, Average flow = 1.1827, Average velocities = 3.2876
+Vmax offset = -2, Average flow = 1.2228, Average velocities = 3.4199
+Vmax offset = -1, Average flow = 1.1847, Average velocities = 3.2249
+Vmax offset = 0, Average flow = 1.1666, Average velocities = 3.4523
+Vmax offset = 1, Average flow = 1.1919, Average velocities = 3.4410
+Vmax offset = 2, Average flow = 1.1884, Average velocities = 3.2741
+Actual density = 0.0100, Average flow = 0.1807, Average velocities = 4.4772
+Actual density = 0.0143, Average flow = 0.2437, Average velocities = 4.2059
+Actual density = 0.0187, Average flow = 0.3114, Average velocities = 4.1712
+Actual density = 0.0227, Average flow = 0.3883, Average velocities = 4.2420
+Actual density = 0.0270, Average flow = 0.4498, Average velocities = 4.1763
+Actual density = 0.0312, Average flow = 0.5132, Average velocities = 4.1230
+Actual density = 0.0350, Average flow = 0.5642, Average velocities = 4.0666
+Actual density = 0.0389, Average flow = 0.5827, Average velocities = 3.7245
+Actual density = 0.0430, Average flow = 0.6291, Average velocities = 3.6433
+Actual density = 0.0472, Average flow = 0.7178, Average velocities = 3.8056
+Actual density = 0.0518, Average flow = 0.7858, Average velocities = 3.8304
+Actual density = 0.0553, Average flow = 0.8359, Average velocities = 3.7595
+Actual density = 0.0586, Average flow = 0.8593, Average velocities = 3.6590
+Actual density = 0.0627, Average flow = 0.9292, Average velocities = 3.6764
+Actual density = 0.0656, Average flow = 0.9594, Average velocities = 3.6122
+Actual density = 0.0691, Average flow = 0.9976, Average velocities = 3.5615
+Actual density = 0.0702, Average flow = 0.9574, Average velocities = 3.3970
+Actual density = 0.0739, Average flow = 0.9974, Average velocities = 3.4497
+Actual density = 0.0781, Average flow = 1.0919, Average velocities = 3.4665
+Actual density = 0.0792, Average flow = 1.1143, Average velocities = 3.5014
+Boost chance = 0.1000, Average flow = 1.1819, Average velocities = 3.2894
+Boost chance = 0.1421, Average flow = 1.2040, Average velocities = 3.3614
+Boost chance = 0.1842, Average flow = 1.1903, Average velocities = 3.4792
+Boost chance = 0.2263, Average flow = 1.1696, Average velocities = 3.3490
+Boost chance = 0.2684, Average flow = 1.2048, Average velocities = 3.4064
+Boost chance = 0.3105, Average flow = 1.1957, Average velocities = 3.3355
+Boost chance = 0.3526, Average flow = 1.2027, Average velocities = 3.3280
+Boost chance = 0.3947, Average flow = 1.1852, Average velocities = 3.4680
+Boost chance = 0.4368, Average flow = 1.1855, Average velocities = 3.1647
+Boost chance = 0.4789, Average flow = 1.1749, Average velocities = 3.4775
+Boost chance = 0.5211, Average flow = 1.2046, Average velocities = 3.3393
+Boost chance = 0.5632, Average flow = 1.2031, Average velocities = 3.3108
+Boost chance = 0.6053, Average flow = 1.1973, Average velocities = 3.3150
+Boost chance = 0.6474, Average flow = 1.2044, Average velocities = 3.4353
+Boost chance = 0.6895, Average flow = 1.2001, Average velocities = 3.4038
+Boost chance = 0.7316, Average flow = 1.1843, Average velocities = 3.3136
+Boost chance = 0.7737, Average flow = 1.2161, Average velocities = 3.4149
+Boost chance = 0.8158, Average flow = 1.2033, Average velocities = 3.3837
+Boost chance = 0.8579, Average flow = 1.2156, Average velocities = 3.5131
+Boost chance = 0.9000, Average flow = 1.2036, Average velocities = 3.4638
+Return rate = 0.0000, Average flow = 1.1863, Average velocities = 3.3171
+Return rate = 0.0526, Average flow = 1.1598, Average velocities = 3.3702
+Return rate = 0.1053, Average flow = 1.2207, Average velocities = 3.4158
+Return rate = 0.1579, Average flow = 1.1875, Average velocities = 3.2835
+Return rate = 0.2105, Average flow = 1.2060, Average velocities = 3.4290
+Return rate = 0.2632, Average flow = 1.2319, Average velocities = 3.2587
+Return rate = 0.3158, Average flow = 1.1679, Average velocities = 3.5268
+Return rate = 0.3684, Average flow = 1.1716, Average velocities = 3.2554
+Return rate = 0.4211, Average flow = 1.1842, Average velocities = 3.3414
+Return rate = 0.4737, Average flow = 1.1859, Average velocities = 3.3399
+Return rate = 0.5263, Average flow = 1.1718, Average velocities = 3.1975
+Return rate = 0.5789, Average flow = 1.1845, Average velocities = 3.3707
+Return rate = 0.6316, Average flow = 1.1885, Average velocities = 3.3843
+Return rate = 0.6842, Average flow = 1.1895, Average velocities = 3.3544
+Return rate = 0.7368, Average flow = 1.2068, Average velocities = 3.3857
+Return rate = 0.7895, Average flow = 1.1830, Average velocities = 3.4993
+Return rate = 0.8421, Average flow = 1.1988, Average velocities = 3.3572
+Return rate = 0.8947, Average flow = 1.1826, Average velocities = 3.3151
+Return rate = 0.9474, Average flow = 1.1885, Average velocities = 3.2772
+Return rate = 1.0000, Average flow = 1.1698, Average velocities = 3.4089
+Lorry=0.0, Regular=0.0, Fast=1.0, Average flow = 1.1877, Average velocities = 3.2812
+Lorry=0.0, Regular=0.1, Fast=0.9, Average flow = 1.2007, Average velocities = 3.3932
+Lorry=0.0, Regular=0.2, Fast=0.8, Average flow = 1.2102, Average velocities = 3.4630
+Lorry=0.0, Regular=0.3, Fast=0.7, Average flow = 1.1970, Average velocities = 3.2704
+Lorry=0.0, Regular=0.4, Fast=0.6, Average flow = 1.1826, Average velocities = 3.4938
+Lorry=0.0, Regular=0.5, Fast=0.5, Average flow = 1.1665, Average velocities = 3.4338
+Lorry=0.0, Regular=0.6, Fast=0.4, Average flow = 1.1797, Average velocities = 3.3836
+Lorry=0.0, Regular=0.7, Fast=0.3, Average flow = 1.2085, Average velocities = 3.3038
+Lorry=0.0, Regular=0.8, Fast=0.2, Average flow = 1.1997, Average velocities = 3.5930
+Lorry=0.0, Regular=0.9, Fast=0.1, Average flow = 1.1802, Average velocities = 3.3033
+Lorry=0.0, Regular=1.0, Fast=0.0, Average flow = 1.1807, Average velocities = 3.3834
+Lorry=0.1, Regular=0.0, Fast=0.9, Average flow = 1.1867, Average velocities = 3.4985
+Lorry=0.1, Regular=0.1, Fast=0.8, Average flow = 1.1869, Average velocities = 3.2569
+Lorry=0.1, Regular=0.2, Fast=0.7, Average flow = 1.2042, Average velocities = 3.4166
+Lorry=0.1, Regular=0.3, Fast=0.6, Average flow = 1.2138, Average velocities = 3.4240
+Lorry=0.1, Regular=0.4, Fast=0.5, Average flow = 1.1991, Average velocities = 3.2857
+Lorry=0.1, Regular=0.5, Fast=0.4, Average flow = 1.1921, Average velocities = 3.4667
+Lorry=0.1, Regular=0.6, Fast=0.3, Average flow = 1.1667, Average velocities = 3.4562
+Lorry=0.1, Regular=0.7, Fast=0.2, Average flow = 1.1613, Average velocities = 3.2165
+Lorry=0.1, Regular=0.8, Fast=0.1, Average flow = 1.1909, Average velocities = 3.3695
+Lorry=0.1, Regular=0.9, Fast=0.0, Average flow = 1.1930, Average velocities = 3.3001
+Lorry=0.2, Regular=0.0, Fast=0.8, Average flow = 1.2161, Average velocities = 3.2613
+Lorry=0.2, Regular=0.1, Fast=0.7, Average flow = 1.2049, Average velocities = 3.3978
+Lorry=0.2, Regular=0.2, Fast=0.6, Average flow = 1.2065, Average velocities = 3.5188
+Lorry=0.2, Regular=0.3, Fast=0.5, Average flow = 1.2145, Average velocities = 3.3100
+Lorry=0.2, Regular=0.4, Fast=0.4, Average flow = 1.2178, Average velocities = 3.3304
+Lorry=0.2, Regular=0.5, Fast=0.3, Average flow = 1.1666, Average velocities = 3.3691
+Lorry=0.2, Regular=0.6, Fast=0.2, Average flow = 1.1888, Average velocities = 3.4310
+Lorry=0.2, Regular=0.7, Fast=0.1, Average flow = 1.2163, Average velocities = 3.3254
+Lorry=0.2, Regular=0.8, Fast=0.0, Average flow = 1.1810, Average velocities = 3.3665
+Lorry=0.3, Regular=0.0, Fast=0.7, Average flow = 1.2052, Average velocities = 3.4261
+Lorry=0.3, Regular=0.1, Fast=0.6, Average flow = 1.1856, Average velocities = 3.2717
+Lorry=0.3, Regular=0.2, Fast=0.5, Average flow = 1.1891, Average velocities = 3.4334
+Lorry=0.3, Regular=0.3, Fast=0.4, Average flow = 1.1855, Average velocities = 3.3057
+Lorry=0.3, Regular=0.4, Fast=0.3, Average flow = 1.2021, Average velocities = 3.3967
+Lorry=0.3, Regular=0.5, Fast=0.2, Average flow = 1.1857, Average velocities = 3.3973
+Lorry=0.3, Regular=0.6, Fast=0.1, Average flow = 1.2124, Average velocities = 3.3424
+Lorry=0.3, Regular=0.7, Fast=0.0, Average flow = 1.1893, Average velocities = 3.3478
+Lorry=0.4, Regular=0.0, Fast=0.6, Average flow = 1.2096, Average velocities = 3.2531
+Lorry=0.4, Regular=0.1, Fast=0.5, Average flow = 1.1831, Average velocities = 3.2810
+Lorry=0.4, Regular=0.2, Fast=0.4, Average flow = 1.1863, Average velocities = 3.5231
+Lorry=0.4, Regular=0.3, Fast=0.3, Average flow = 1.2322, Average velocities = 3.1812
+Lorry=0.4, Regular=0.4, Fast=0.2, Average flow = 1.1902, Average velocities = 3.2824
+Lorry=0.4, Regular=0.5, Fast=0.1, Average flow = 1.1920, Average velocities = 3.3688
+Lorry=0.4, Regular=0.6, Fast=0.0, Average flow = 1.2000, Average velocities = 3.3377
+Lorry=0.5, Regular=0.0, Fast=0.5, Average flow = 1.1752, Average velocities = 3.2608
+Lorry=0.5, Regular=0.1, Fast=0.4, Average flow = 1.1997, Average velocities = 3.4432
+Lorry=0.5, Regular=0.2, Fast=0.3, Average flow = 1.1982, Average velocities = 3.2901
+Lorry=0.5, Regular=0.3, Fast=0.2, Average flow = 1.2064, Average velocities = 3.4403
+Lorry=0.5, Regular=0.4, Fast=0.1, Average flow = 1.2023, Average velocities = 3.4285
+Lorry=0.5, Regular=0.5, Fast=0.0, Average flow = 1.1958, Average velocities = 3.3028
+Lorry=0.6, Regular=0.0, Fast=0.4, Average flow = 1.1759, Average velocities = 3.2689
+Lorry=0.6, Regular=0.1, Fast=0.3, Average flow = 1.1953, Average velocities = 3.3592
+Lorry=0.6, Regular=0.2, Fast=0.2, Average flow = 1.1856, Average velocities = 3.2511
+Lorry=0.6, Regular=0.3, Fast=0.1, Average flow = 1.1944, Average velocities = 3.3798
+Lorry=0.6, Regular=0.4, Fast=0.0, Average flow = 1.1957, Average velocities = 3.2697
+Lorry=0.7, Regular=0.0, Fast=0.3, Average flow = 1.2040, Average velocities = 3.4324
+Lorry=0.7, Regular=0.1, Fast=0.2, Average flow = 1.1926, Average velocities = 3.2368
+Lorry=0.7, Regular=0.2, Fast=0.1, Average flow = 1.2139, Average velocities = 3.2517
+Lorry=0.7, Regular=0.3, Fast=0.0, Average flow = 1.2133, Average velocities = 3.3679
+Lorry=0.8, Regular=0.0, Fast=0.2, Average flow = 1.1695, Average velocities = 3.3562
+Lorry=0.8, Regular=0.1, Fast=0.1, Average flow = 1.2062, Average velocities = 3.3379
+Lorry=0.8, Regular=0.2, Fast=0.0, Average flow = 1.1812, Average velocities = 3.3675
+Lorry=0.9, Regular=0.0, Fast=0.1, Average flow = 1.1881, Average velocities = 3.3876
+Lorry=0.9, Regular=0.1, Fast=0.0, Average flow = 1.2034, Average velocities = 3.4251
+Lorry=1.0, Regular=0.0, Fast=0.0, Average flow = 1.1705, Average velocities = 3.4784
+finished
