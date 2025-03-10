@@ -396,8 +396,9 @@ def calculate_local_congestion(lanes, center_position, radius):
     return local_density, local_velocity
 
 # main code for simulation
-def simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, 
-                                           obstacle_start_time, obstacle_position, obstacle_duration, obstacle_lane = 0, obstacle_type=3, measurement_radius=25, interval_size=10, random_brake_override=None, driver_types_dict=None):
+def simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, obstacle_start_time, obstacle_position, obstacle_duration, 
+                                             obstacle_lane = 0, obstacle_type=3, measurement_radius=25, interval_size=10, 
+                                             random_brake_override=None, driver_types_dict=None):
     if driver_types_dict is None:
         driver_types_dict = DRIVER_TYPES
         
@@ -529,8 +530,8 @@ def main():
     obstacle_duration = 1000
 
 
-    results = simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, 
-                                            obstacle_start_time, obstacle_position, obstacle_duration, obstacle_lane = 0, obstacle_type=3, measurement_radius=10, interval_size=10, random_brake_override=None, driver_types_dict=None)
+    results = simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, obstacle_start_time, obstacle_position, obstacle_duration, 
+                                                       obstacle_lane = 0, obstacle_type=3, measurement_radius=80, interval_size=10, random_brake_override=None, driver_types_dict=None)
     
     plot_obstacle_impact(results)
     print("finished")
