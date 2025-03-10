@@ -396,8 +396,9 @@ def calculate_local_congestion(lanes, center_position, radius):
     return local_density, local_velocity
 
 # main code for simulation
-def simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, 
-                                           obstacle_start_time, obstacle_position, obstacle_duration, obstacle_lane = 0, obstacle_type=3, measurement_radius=25, interval_size=10, random_brake_override=None, driver_types_dict=None):
+def simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, obstacle_start_time, obstacle_position, obstacle_duration, 
+                                             obstacle_lane = 0, obstacle_type=3, measurement_radius=25, interval_size=10, 
+                                             random_brake_override=None, driver_types_dict=None):
     if driver_types_dict is None:
         driver_types_dict = DRIVER_TYPES
         
@@ -481,11 +482,11 @@ def simulate_traffic_stability_with_obstacle(length, t0, steps, target_density,
 # generate the plot
 def plot_obstacle_impact(results):
     time_steps = range(len(results['global_densities']))
-    fig, axs = plt.subplots(2, 1, figsize=(12, 8))
+    fig, axs = plt.subplots(2, 1, figsize=(15, 6))
 
     # density
     axs[0].plot(time_steps, results['global_densities'], 'r-', label='Global Density')
-    axs[0].plot(time_steps, results['local_densities'], 'b-', label='Local Density')
+    axs[0].plot(time_steps, results['local_densities'], 'b-', label='Local Density', alpha= 0.5)
     
     axs[0].axvline(x=results['obstacle_start_time'], color='k', linestyle='--', label='Obstacle Appear')
     axs[0].axvline(x=results['obstacle_end_time'], color='g', linestyle='--', label='Obstacle Disappear')
@@ -497,7 +498,7 @@ def plot_obstacle_impact(results):
     
     # speed
     axs[1].plot(time_steps, results['global_velocities'], 'r-', label='Global Velocity')
-    axs[1].plot(time_steps, results['local_velocities'], 'b-', label='Local Velocity')
+    axs[1].plot(time_steps, results['local_velocities'], 'b-', label='Local Velocity',alpha= 0.5)
     
     axs[1].axvline(x=results['obstacle_start_time'], color='k', linestyle='--', label='Obstacle Appear')
     axs[1].axvline(x=results['obstacle_end_time'], color='g', linestyle='--', label='Obstacle Disappear')
@@ -511,24 +512,26 @@ def plot_obstacle_impact(results):
     plt.tight_layout()
     
     plt.savefig('obstacle_impact.png')
-    plt.show()
+
     
     return
 
 def main():
+    np.random.seed(20)
+
     print("start")
     
     length = 1000  
     t0 = 0      
-    steps = 2500
+    steps = 8000
     target_density = 1     
-    obstacle_start_time = 1500
+    obstacle_start_time = 3000
     obstacle_position = 500
-    obstacle_duration = 500
+    obstacle_duration = 1000
 
 
-    results = simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, 
-                                            obstacle_start_time, obstacle_position, obstacle_duration, obstacle_lane = 0, obstacle_type=3, measurement_radius=10, interval_size=10, random_brake_override=None, driver_types_dict=None)
+    results = simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, obstacle_start_time, obstacle_position, obstacle_duration, 
+                                                       obstacle_lane = 0, obstacle_type=3, measurement_radius=80, interval_size=10, random_brake_override=None, driver_types_dict=None)
     
     plot_obstacle_impact(results)
     print("finished")
