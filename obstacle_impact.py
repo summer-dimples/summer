@@ -485,7 +485,7 @@ def plot_obstacle_impact(results):
 
     # density
     axs[0].plot(time_steps, results['global_densities'], 'r-', label='Global Density')
-    axs[0].plot(time_steps, results['local_densities'], 'b-', label='Local Density')
+    axs[0].plot(time_steps, results['local_densities'], 'b-', label='Local Density', alpha= 0.5)
     
     axs[0].axvline(x=results['obstacle_start_time'], color='k', linestyle='--', label='Obstacle Appear')
     axs[0].axvline(x=results['obstacle_end_time'], color='g', linestyle='--', label='Obstacle Disappear')
@@ -497,7 +497,7 @@ def plot_obstacle_impact(results):
     
     # speed
     axs[1].plot(time_steps, results['global_velocities'], 'r-', label='Global Velocity')
-    axs[1].plot(time_steps, results['local_velocities'], 'b-', label='Local Velocity')
+    axs[1].plot(time_steps, results['local_velocities'], 'b-', label='Local Velocity',alpha= 0.5)
     
     axs[1].axvline(x=results['obstacle_start_time'], color='k', linestyle='--', label='Obstacle Appear')
     axs[1].axvline(x=results['obstacle_end_time'], color='g', linestyle='--', label='Obstacle Disappear')
@@ -511,20 +511,22 @@ def plot_obstacle_impact(results):
     plt.tight_layout()
     
     plt.savefig('obstacle_impact.png')
-    plt.show()
+
     
     return
 
 def main():
+    np.random.seed(20)
+
     print("start")
     
     length = 1000  
     t0 = 0      
-    steps = 2500
+    steps = 8000
     target_density = 1     
-    obstacle_start_time = 1500
+    obstacle_start_time = 3000
     obstacle_position = 500
-    obstacle_duration = 500
+    obstacle_duration = 1000
 
 
     results = simulate_traffic_stability_with_obstacle(length, t0, steps, target_density, 
