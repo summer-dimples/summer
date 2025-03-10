@@ -481,7 +481,7 @@ def simulate_traffic_stability_with_obstacle(length, t0, steps, target_density,
 # generate the plot
 def plot_obstacle_impact(results):
     time_steps = range(len(results['global_densities']))
-    fig, axs = plt.subplots(2, 1, figsize=(12, 8))
+    fig, axs = plt.subplots(2, 1, figsize=(15, 6))
 
     # density
     axs[0].plot(time_steps, results['global_densities'], 'r-', label='Global Density')
