@@ -454,11 +454,11 @@ def plot_vehicle_ratio(ratio_results):
 # sensitive analysis
 def run_sensitivity_analysis():
     
-    length = 10   
-    t0 = 10       
-    steps = 10  
+    length = 1500   
+    t0 = 1500       
+    steps = 5000   
     base_target_density = 0.2  
-    interval_size = 1
+    interval_size = 50
 
     # parameter ranges
     random_brake_params = np.linspace(0, 0.6, 20)  
@@ -505,7 +505,7 @@ def run_sensitivity_analysis():
         avg_velocities = np.mean(velocities)
         random_brake_results.append(avg_flow)
         random_brake_velocities.append(avg_velocities)
-        print(f"Random brake chance = {random_brake:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
+        print(f"Random slow down chance = {random_brake:.4f}, Average flow = {avg_flow:.4f}, Average velocities = {avg_velocities:.4f}")
     
     # effect of overtake rate
     for overtake_rate in overtake_params:
@@ -615,7 +615,7 @@ def run_sensitivity_analysis():
     axs[0,0].plot(random_brake_params, random_brake_velocities, 'o-', label='Average Velocities', color='blue')
     axs[0,0].set_xlabel('Random Slow Down Probability', fontsize=20)
     axs[0,0].set_ylabel('Values', fontsize=20)
-    axs[0,0].set_title('Impact of Random Slow Down Probability on Flow and Velocities', fontsize=22)
+    axs[0,0].set_title('Impact of Random Slow Down Probability', fontsize=22)
     axs[0,0].grid(True)
     axs[0,0].legend(fontsize=20)
     
@@ -624,7 +624,7 @@ def run_sensitivity_analysis():
     axs[0,1].plot(overtake_params, overtake_velocities, 'o-', label='Average Velocities', color='blue')
     axs[0,1].set_xlabel('Overtake Rate', fontsize=20)
     axs[0,1].set_ylabel('Values', fontsize=20)
-    axs[0,1].set_title('Impact of Overtake Rate on Flow and Velocities', fontsize=22)
+    axs[0,1].set_title('Impact of Overtake Rate', fontsize=22)
     axs[0,1].grid(True)
     axs[0,1].legend(fontsize=20)
 
@@ -633,7 +633,7 @@ def run_sensitivity_analysis():
     axs[0,2].plot(vmax_offsets, vmax_velocities, 'o-', label='Average Velocities', color='blue')
     axs[0,2].set_xlabel('Maximum Velocity Offset', fontsize=20)
     axs[0,2].set_ylabel('Values', fontsize=20)
-    axs[0,2].set_title('Impact of Maximum Velocity on Flow and Velocities', fontsize=22)
+    axs[0,2].set_title('Impact of Maximum Velocity', fontsize=22)
     axs[0,2].grid(True)
     axs[0,2].legend(fontsize=20)
 
@@ -642,7 +642,7 @@ def run_sensitivity_analysis():
     axs[1,0].plot(actual_densities, density_velocities, 'o-', label='Average Velocities', color='blue')
     axs[1,0].set_xlabel('Actual Density', fontsize=20)
     axs[1,0].set_ylabel('Values', fontsize=20)
-    axs[1,0].set_title('Impact of Density on Flow and Velocities', fontsize=22)
+    axs[1,0].set_title('Impact of Density', fontsize=22)
     axs[1,0].grid(True)
     axs[1,0].legend(fontsize=20)
 
@@ -651,7 +651,7 @@ def run_sensitivity_analysis():
     axs[1,1].plot(boost_chance_params, boost_chance_velocities, 'o-', label='Average Velocities', color='blue')
     axs[1,1].set_xlabel('Boost Chance', fontsize=20)
     axs[1,1].set_ylabel('Values', fontsize=20)
-    axs[1,1].set_title('Impact of Boost Chance on Flow and Velocities', fontsize=22)
+    axs[1,1].set_title('Impact of Boost Chance', fontsize=22)
     axs[1,1].grid(True)
     axs[1,1].legend(fontsize=20)
 
@@ -660,16 +660,62 @@ def run_sensitivity_analysis():
     axs[1,2].plot(return_rate_params, return_rate_velocities, 'o-', label='Average Velocities', color='blue')
     axs[1,2].set_xlabel('Return Rate', fontsize=20)
     axs[1,2].set_ylabel('Values', fontsize=20)
-    axs[1,2].set_title('Impact of Return Rate on Flow and Velocities', fontsize=22)
+    axs[1,2].set_title('Impact of Return Rate', fontsize=22)
     axs[1,2].grid(True)
     axs[1,2].legend(fontsize=20)
-    
     
     plt.tight_layout(pad=4.0)
     plt.savefig('sensitivity_analysis_results.png', dpi=600)
     
+    # save each subplot
+    titles = ["random_slow_down", "overtake", "vmax", "density", "boost", "return"]
+    for index in range(6):
+        plt.figure(figsize=(12, 10))
+        
+        if index == 0:  # Random brake
+            plt.plot(random_brake_params, random_brake_results, 'o-', linewidth=2, markersize=8, label='Average Flow', color='red')
+            plt.plot(random_brake_params, random_brake_velocities, 'o-', linewidth=2, markersize=8, label='Average Velocities', color='blue')
+            plt.xlabel('Random Brake Probability', fontsize=20)
+            plt.title('Impact of Random Brake Probability', fontsize=22)
+        
+        elif index == 1:  # Overtake rate
+            plt.plot(overtake_params, overtake_results, 'o-', linewidth=2, markersize=8, label='Average Flow', color='red')
+            plt.plot(overtake_params, overtake_velocities, 'o-', linewidth=2, markersize=8, label='Average Velocities', color='blue')
+            plt.xlabel('Overtake Rate', fontsize=20)
+            plt.title('Impact of Overtake Rate', fontsize=22)
+        
+        elif index == 2:  # Maximum velocity
+            plt.plot(vmax_offsets, vmax_results, 'o-', linewidth=2, markersize=8, label='Average Flow', color='red')
+            plt.plot(vmax_offsets, vmax_velocities, 'o-', linewidth=2, markersize=8, label='Average Velocities', color='blue')
+            plt.xlabel('Maximum Velocity Offset', fontsize=20)
+            plt.title('Impact of Maximum Velocity', fontsize=22)
+        
+        elif index == 3:  # Density
+            plt.plot(actual_densities, density_results, 'o-', linewidth=2, markersize=8, label='Average Flow', color='red')
+            plt.plot(actual_densities, density_velocities, 'o-', linewidth=2, markersize=8, label='Average Velocities', color='blue')
+            plt.xlabel('Actual Density', fontsize=20)
+            plt.title('Impact of Density', fontsize=22)
+        
+        elif index == 4:  # Boost chance
+            plt.plot(boost_chance_params, boost_chance_results, 'o-', linewidth=2, markersize=8, label='Average Flow', color='red')
+            plt.plot(boost_chance_params, boost_chance_velocities, 'o-', linewidth=2, markersize=8, label='Average Velocities', color='blue')
+            plt.xlabel('Boost Chance', fontsize=20)
+            plt.title('Impact of Boost Chance', fontsize=22)
+        
+        elif index == 5:  # Return rate
+            plt.plot(return_rate_params, return_rate_results, 'o-', linewidth=2, markersize=8, label='Average Flow', color='red')
+            plt.plot(return_rate_params, return_rate_velocities, 'o-', linewidth=2, markersize=8, label='Average Velocities', color='blue')
+            plt.xlabel('Return Rate', fontsize=20)
+            plt.title('Impact of Return Rate', fontsize=22)
+    
+        plt.ylabel('Values', fontsize=20)
+        plt.grid(True)
+        plt.legend(fontsize=20)
+        plt.tight_layout()
+        plt.savefig(f'sensitivity_{titles[index]}.png', dpi=300, bbox_inches='tight')
+        plt.close()
+    
     plot_vehicle_ratio(ratio_results)
-
 
     return 
 
@@ -678,7 +724,6 @@ def compare_brake_chances():
     t0 = 1500       
     steps = 2000     
     interval_size = 20 
-    
     
     brake_chances = [0.0, 0.1, 0.3, 0.5]
     target_densities = np.linspace(0.01, 0.1, 15)
@@ -720,7 +765,7 @@ def compare_brake_chances():
             avg_velocities, 
             color=colors[i], 
             marker=markers[i],
-            label=f'probability of random brake = {brake_chance}'
+            label=f'probability of slow down = {brake_chance}'
         )
         
         z = np.polyfit(avg_densities, avg_velocities, 3)
@@ -734,7 +779,7 @@ def compare_brake_chances():
             avg_flows, 
             color=colors[i], 
             marker=markers[i],
-            label=f'probability of random brake = {brake_chance}'
+            label=f'probability of slow down = {brake_chance}'
         )
 
         z = np.polyfit(avg_densities, avg_flows, 3)
@@ -747,7 +792,7 @@ def compare_brake_chances():
             avg_lane_changes, 
             color=colors[i], 
             marker=markers[i],
-            label=f'probability of random brake = {brake_chance}'
+            label=f'probability of slow down = {brake_chance}'
         )
         
 
@@ -791,7 +836,6 @@ def main():
     
     run_sensitivity_analysis()
     
-
     print("finished")
 
 if __name__ == "__main__":
