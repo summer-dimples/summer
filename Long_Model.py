@@ -721,15 +721,16 @@ def run_sensitivity_analysis():
 
 def compare_brake_chances():
     length = 1000   
-    t0 = 1500       
+    t0 = 1000       
     steps = 2000     
-    interval_size = 20 
+    interval_size = 20  
+    
     
     brake_chances = [0.0, 0.1, 0.3, 0.5]
     target_densities = np.linspace(0.01, 0.1, 15)
     all_results = {}
     
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(24, 8))
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(28, 10))
     colors = ['blue', 'green', 'red', 'purple']
     markers = ['o', 's', '^', 'D']
     
@@ -741,15 +742,9 @@ def compare_brake_chances():
         
         for target_density in target_densities:
             flows, densities, velocities, lane_change_rates = simulate_traffic_with_density_control(
-                length=length,
-                t0=t0,
-                steps=steps,
-                target_density=target_density,
-                interval_size=interval_size,
-                random_brake_override=brake_chance,
-                driver_types_dict=None
-            )
-            
+                length, t0, steps, target_density, interval_size, 
+                random_brake_override=None, driver_types_dict=None
+                )
             avg_velocity = np.mean(velocities)
             avg_density = np.mean(densities)
             avg_flow = np.mean(flows)
@@ -765,7 +760,7 @@ def compare_brake_chances():
             avg_velocities, 
             color=colors[i], 
             marker=markers[i],
-            label=f'probability of slow down = {brake_chance}'
+            label=f'probability of random brake = {brake_chance}'
         )
         
         z = np.polyfit(avg_densities, avg_velocities, 3)
@@ -779,7 +774,7 @@ def compare_brake_chances():
             avg_flows, 
             color=colors[i], 
             marker=markers[i],
-            label=f'probability of slow down = {brake_chance}'
+            label=f'probability of random brake = {brake_chance}'
         )
 
         z = np.polyfit(avg_densities, avg_flows, 3)
@@ -792,7 +787,7 @@ def compare_brake_chances():
             avg_lane_changes, 
             color=colors[i], 
             marker=markers[i],
-            label=f'probability of slow down = {brake_chance}'
+            label=f'probability of random brake = {brake_chance}'
         )
         
 
@@ -802,26 +797,26 @@ def compare_brake_chances():
         ax3.plot(x_range, p(x_range), color=colors[i], linestyle='--')
 
             
-    ax1.set_xlabel('Density')
-    ax1.set_ylabel('Speed')
-    ax1.set_title('Speed-Density Relationship')
+    ax1.set_xlabel('Density', fontsize = 20)
+    ax1.set_ylabel('Speed', fontsize = 20)
+
     ax1.grid(True, linestyle='--', alpha=0.7)
     ax1.legend()
 
-    ax2.set_xlabel('Density')
-    ax2.set_ylabel('Flow')
-    ax2.set_title('Flow-Density Relationship')
+    ax2.set_xlabel('Density', fontsize = 20)
+    ax2.set_ylabel('Flow', fontsize = 20)
+
     ax2.grid(True, linestyle='--', alpha=0.7)
     ax2.legend()
     
-    ax3.set_xlabel('Density')
-    ax3.set_ylabel('Lane Change Rate (changes per vehicle)')
-    ax3.set_title('Lane Change Rate-Density Relationship')
+    ax3.set_xlabel('Density', fontsize = 20)
+    ax3.set_ylabel('Lane Change Rate', fontsize = 20)
+
     ax3.grid(True, linestyle='--', alpha=0.7)
     ax3.legend()
     
     plt.tight_layout()
-    plt.savefig('2.png')
+    plt.savefig('traffic_comparison_for_random_brake.png')
     plt.show()
     
     return {
@@ -833,9 +828,8 @@ def compare_brake_chances():
 
 def main():
     print("start")
-    
+
     run_sensitivity_analysis()
-    
     print("finished")
 
 if __name__ == "__main__":
