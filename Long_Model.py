@@ -720,10 +720,10 @@ def run_sensitivity_analysis():
     return 
 
 def compare_brake_chances():
-    length = 1000   
-    t0 = 1000       
-    steps = 2000     
-    interval_size = 20  
+    length = 100   
+    t0 = 200       
+    steps = 500     
+    interval_size = 10  
     
     
     brake_chances = [0.0, 0.1, 0.3, 0.5]
@@ -828,8 +828,9 @@ def compare_brake_chances():
 
 def main():
     print("start")
+    np.random.seed(2532)    
+     compare_brake_chances()
 
-    run_sensitivity_analysis()
     print("finished")
 
 if __name__ == "__main__":
