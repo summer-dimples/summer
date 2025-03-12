@@ -1,11 +1,13 @@
-# File that is contains models:
+# Cellular Automaton
 
-1. `Closed_Model1.ipynb` for model 1
-2. `lane changes and multiple lane (1).ipynb` for model 2
-3. `Long_Model.ipynb` for model 3
+Done by Jinxun Chen and Yixuan Huang.
+File that contains code:
 
-# summer
+1. `Closed_Model.ipynb` for basic
+2. `Long_Model.ipynb` for complex
+3. `flow_density_highd.ipynb` for generating plot using data from HighD
+   Due to copyright reasons, we are not able to provide the HighD dataset file.
 
+# Car Following
 
-
-# Gary(Jinxun Chen)
+Done by Joe Henden
