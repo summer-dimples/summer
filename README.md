@@ -13,3 +13,7 @@ We initially developed and tested our code in Jupyter Notebook. Once the code wa
 # Car Following
 
 Done by Joe Henden
+
+# Continuum Model
+
+Done by Junhan Zhang and Joe Singh-Best
