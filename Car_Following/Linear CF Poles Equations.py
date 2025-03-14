@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines  # For manually adding legend entries
+import matplotlib.lines as mlines
 from scipy.optimize import fsolve
 
 # Define the equations
@@ -17,8 +17,8 @@ beta_vals = np.linspace(-4, 4, 500)  # Range of beta values
 # Create a meshgrid for plotting
 A, B = np.meshgrid(alpha_vals, beta_vals)
 
-# Compute values for Equation (16) - This is independent of C
-Z_16 = equation_16(A, B)
+# Compute values independent of C
+Z = equation_16(A, B)
 
 # Define three values of C for comparison
 C_values = [0.3, np.pi /2, 5]  # Example values: C1, C2, C3
@@ -28,7 +28,7 @@ colors = ['r', 'g', 'm']  # Different colors for different C values
 plt.figure(figsize=(10, 6))
 
 # Plot Equation (16) (Same for all C values)
-contour_16 = plt.contour(A, B, Z_16, levels=[0], colors='b', linewidths=2)
+contour_16 = plt.contour(A, B, Z, levels=[0], colors='b', linewidths=2)
 
 # Loop through the C values and plot Equation (18) for each
 contour_18_list = []
@@ -52,9 +52,6 @@ legend_elements = [
     mlines.Line2D([], [], color='m', linewidth=2, label=f'Eq. 3.14: $C = {C_values[2]}$')
 ]
 
-# Add the legend
-
-plt.savefig("my_plot.png", dpi=300, bbox_inches="tight")
 # Show the plot
 plt.show()
 
